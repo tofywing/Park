@@ -93,7 +93,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     public static final float DEFAULT_ZOOM = 9.5f;
     public static final float PARK_ZOOM = 12.0f;
     public static final String WIFI_CHECKING_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
-    public static final String MAIN_PREFERENCE = "mainPreference";
+    public static final String MAIN_PREFERENCE = "sharedPreference";
     public static final String WIFI_DISABLED = "wifiDisabled";
     public static final String ME_POSITION = "myCurrentLocationLatLng";
 

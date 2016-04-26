@@ -16,7 +16,7 @@ import kinsa.interview.yee.park.data.ParkInfo;
  */
 public class ParkInfoManager {
 
-    public static final String PREFS = "parkInfoPrefs";
+    public static final String PREFS = "sharedPreference";
     public static final String FILTER_TOKEN = "filterSwitchTokenForList";
     public static final String LIST_BY_DISTANCE = "parkListByDistance";
     public static final String LIST_BY_SCALE = "parkListByScale";

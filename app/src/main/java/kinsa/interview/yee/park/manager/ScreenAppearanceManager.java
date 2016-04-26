@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class ScreenAppearanceManager {
 
-    public static final String PREFERENCE = "appearanceManagerSharedPreference";
+    public static final String PREFERENCE = "sharedPreference";
     public static final String SCREEN_WIDTH = "screenWidth";
     public static final String SCREEN_LENGTH = "screenLength";
     public static final String LIST_WIDTH = "listWidth";

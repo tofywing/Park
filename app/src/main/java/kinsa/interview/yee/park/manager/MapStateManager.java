@@ -13,7 +13,7 @@ import kinsa.interview.yee.park.data.MapState;
  * Created by Yee on 4/14/16.
  */
 public class MapStateManager {
-    public static final String PREFS = "mapStatePrefs";
+    public static final String PREFS = "sharedPreference";
     public static final String LOCALITY = "locality";
     public static final String MAP_STATE = "mapState";
     public static final String LATITUDE = "savedLatitude";

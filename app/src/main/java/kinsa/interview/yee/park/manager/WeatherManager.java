@@ -14,7 +14,7 @@ import kinsa.interview.yee.park.data.Forecast;
  */
 public class WeatherManager {
 
-    public static final String PREFS = "weatherPrefs";
+    public static final String PREFS = "sharedPreference";
     public static final String PREFS_HEADER = "weather";
 
     SharedPreferences mPrefs;

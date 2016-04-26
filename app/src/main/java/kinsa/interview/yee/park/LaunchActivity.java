@@ -1,6 +1,8 @@
 package kinsa.interview.yee.park;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
@@ -23,6 +25,7 @@ public class LaunchActivity extends AppCompatActivity {
 // It is a little bit too late to add this, suppose to do some pre-loading from here, but since in current version, this
 // activity is just a starting page.
 
+    public static final String PREFS = "sharedPreference";
     ImageView mSignImage;
     ImageView mParkImage;
     RelativeLayout mContainer;
@@ -71,7 +74,7 @@ public class LaunchActivity extends AppCompatActivity {
         mContainer = (RelativeLayout) findViewById(R.id.launchContainer);
         mSignImage.setBackgroundResource(R.drawable.bird);
         final AnimationDrawable animDrawable = (AnimationDrawable) mSignImage.getBackground();
-        animDrawable.setExitFadeDuration(30);
+        animDrawable.setExitFadeDuration(10);
         animDrawable.start();
         mHandler = new Handler();
         mRunnable = new Runnable() {
@@ -84,7 +87,7 @@ public class LaunchActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.main_fade_in, R.anim.launch_fade_out);
             }
         };
-        mHandler.postDelayed(mRunnable, 3420);
+        mHandler.postDelayed(mRunnable, 3500);
     }
 
     public void clearApplicationData() {
@@ -98,6 +101,9 @@ public class LaunchActivity extends AppCompatActivity {
                 }
             }
         }
+        SharedPreferences.Editor editor = this.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit();
+        editor.clear();
+        editor.apply();
     }
 
     public static boolean deleteDir(File dir) {
