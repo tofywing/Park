@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Park</string>
+    <string name="app_name">ParkNearMe</string>
     <string name="google_app_id">AIzaSyC8QEWGVFWfyfm2rwTaIq5qq1ZevUvffW8</string>
     <string name="address_title_main">Address: </string>
     <string name="button_reload">RELOAD</string>
@@ -53,5 +53,5 @@
     <string name="area_format">%s acres</string>
     <string name="map_loading_overtime">Map\u0027s data is not available currently.</string>
     <string name="filter_title_by_distance">Sort By Distance</string>
-    <string name="filter_tile_by_scale">Sort By Scale</string>
+    <string name="filter_tile_by_alphabet">Sort By Alphabet</string>
 </resources>

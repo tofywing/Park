@@ -45,7 +45,7 @@ public class ParkInfoManager {
         }.getType());
     }
 
-    public ArrayList<ParkInfo> getSavedParkListByScale() {
+    public ArrayList<ParkInfo> getSavedParkListByAlphabet() {
         String json = mParkPrefs.getString(LIST_BY_SCALE, "");
         Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
         return gson.fromJson(json, new TypeToken<ArrayList<ParkInfo>>() {

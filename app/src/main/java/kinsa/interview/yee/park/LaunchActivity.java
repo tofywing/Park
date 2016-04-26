@@ -20,8 +20,8 @@ import kinsa.interview.yee.park.manager.ScreenAppearanceManager;
 
 public class LaunchActivity extends AppCompatActivity {
 
-//It is a little bit too late to add this, suppose to do some pre-loading from here, but current version this activity
-// is just a starting page.
+//It is a little bit too late to add this, suppose to do some pre-loading from here, but since in current version, this
+// activity is just a starting page.
 
     ImageView mSignImage;
     ImageView mParkImage;

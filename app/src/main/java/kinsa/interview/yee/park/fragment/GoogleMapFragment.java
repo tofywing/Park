@@ -119,7 +119,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     boolean wifiDisabled = false;
     ArrayList<ParkInfo> mParkListSelect;
     ArrayList<ParkInfo> mParkListByDistance;
-    ArrayList<ParkInfo> mParkListByScale;
+    ArrayList<ParkInfo> mParkListByAlphabet;
     FragmentManager mFragmentManager;
     RelativeLayout mListContainer;
     RelativeLayout mListUpContainer;
@@ -290,7 +290,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (mParkListSelect != null) {
+                if (mParkListSelect != null && mParkSelectedPosition != -1) {
                     ParkInfo parkInfo = mParkListSelect.get(mParkSelectedPosition);
                     parkInfo.setIsSelected(0);
                     mParkListSelect.set(mParkSelectedPosition, parkInfo);
@@ -304,11 +304,11 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                     mFilterTitle.setText(getString(R.string.filter_title_by_distance));
                 } else {
                     byDistanceToken = 0;
-                    mParkListSelect = mParkListByScale;
+                    mParkListSelect = mParkListByAlphabet;
                     mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
                             ScreenAppearanceManager.adapterHeight);
                     setListAdapter(mAdapter);
-                    mFilterTitle.setText(getString(R.string.filter_tile_by_scale));
+                    mFilterTitle.setText(getString(R.string.filter_tile_by_alphabet));
                 }
                 if (mParkMarker != null) mParkMarker.remove();
                 if (meLatLng != null) cameraUpdate(meLatLng.latitude, meLatLng.longitude, DEFAULT_ZOOM);
@@ -318,7 +318,6 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-//        showProgressDialog(getActivity());
         mProgressBar.setVisibility(View.VISIBLE);
         setGPSInterval();
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
@@ -373,7 +372,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         mMapState.setParkSelected(mParkSelected);
         mMapState.setSelectedPosition(mParkSelectedPosition);
         mMapStateManager.saveMapState(mMapState, mCurrentLatitude, mCurrentLongitude, mCurrentLocality);
-        mParkManager.saveParkListWithToken(mParkListByDistance, mParkListByScale, byDistanceToken);
+        mParkManager.saveParkListWithToken(mParkListByDistance, mParkListByAlphabet, byDistanceToken);
         SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
         String json = gson.toJson(meLatLng);
@@ -417,9 +416,9 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     public void onSFGovServiceSuccess(ProgressDialog dialog, ArrayList<ParkInfo> dataSet) throws IOException {
         getCurrentLocation();
         if (meLatLng != null) mParkListByDistance = mSFGovService.getParksByDistance(dataSet, meLatLng, dataSet.size());
-        mParkListByScale = mSFGovService.getParksByScale(dataSet, dataSet.size());
+        mParkListByAlphabet = dataSet;
         if (byDistanceToken == 1) mParkListSelect = mParkListByDistance;
-        else mParkListSelect = mParkListByScale;
+        else mParkListSelect = mParkListByAlphabet;
         mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect, ScreenAppearanceManager
                 .adapterHeight);
         setListAdapter(mAdapter);
@@ -586,19 +585,19 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
 
     private void dataRestore() {
         mParkListByDistance = mParkManager.getSavedParkListByDistance();
-        mParkListByScale = mParkManager.getSavedParkListByScale();
+        mParkListByAlphabet = mParkManager.getSavedParkListByAlphabet();
         byDistanceToken = mParkManager.getSavedFilterToken();
         mFilterTitle.setText(byDistanceToken == 1 ? getString(R.string.filter_title_by_distance) : getString(R.string
-                .filter_tile_by_scale));
+                .filter_tile_by_alphabet));
         if (byDistanceToken == 1) {
             mFilterTitle.setText(getString(R.string.filter_title_by_distance));
             mFilterSwitch.setChecked(false);
         } else {
-            mFilterTitle.setText(getString(R.string.filter_tile_by_scale));
+            mFilterTitle.setText(getString(R.string.filter_tile_by_alphabet));
             mFilterSwitch.setChecked(true);
         }
-        if (mParkListByScale != null && mParkListByDistance != null) {
-            mParkListSelect = byDistanceToken == 1 ? mParkListByDistance : mParkListByScale;
+        if (mParkListByAlphabet != null && mParkListByDistance != null) {
+            mParkListSelect = byDistanceToken == 1 ? mParkListByDistance : mParkListByAlphabet;
         }
         mMapState = mMapStateManager.getSavedMapState();
         if (mMapState != null) {
