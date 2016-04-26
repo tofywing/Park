@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Park</string>
+    <string name="google_app_id">AIzaSyC8QEWGVFWfyfm2rwTaIq5qq1ZevUvffW8</string>
+    <string name="address_title_main">Address: </string>
+    <string name="button_reload">RELOAD</string>
+    <string name="button_list">LIST</string>
+    <string name="button_me">ME</string>
+    <string name="button_park">PARK</string>
+    <string name="default_string">N/A</string>
+    <string name="service_unavailable">Can\u0027t connect to google services</string>
+    <string name="map_initialize">Map initializing…</string>
+    <string name="service_not_ready">Map isn\u0027t Ready</string>
+    <string name="service_ready">Ready to Map</string>
+    <string name="park_ready">"Park Information Updated"</string>
+    <string name="map_loading_failed">Map Loading Failed</string>
+    <string name="map_reloading">Reloading map…</string>
+    <string name="last_location_failed">Can\u0027t find your location</string>
+    <string name="alert_wifi_disabled">Your Wifi is disabled and all the parks relative information and snapshot will
+        be fetched from your local storage.</string>
+    <string name="alert_server_error_saved">Can\u0027t get any park information from server, system will use the
+        data saved on your local storage.</string>
+    <string name="alert_server_error_unsaved">Can\u0027t get any park information from server, and there is no
+        previous data saved on your local storage.</string>
+    <string name="alert_park_button">No previous park selected.</string>
+    <string name="alert_no_park_info">There is no any park information available.</string>
+    <string name="alert_map_loaded_unsuccessful">Map\u0027s not finished its loading, please wait a sec and try
+        again.</string>
+    <string name="alert_weather_load_unsuccessful">There is no accurate weather information available.</string>
+    <string name="alert_server_date_incorrect">The distance calculated is %.2f km from your current location. The
+        server\u0027s data may not be accurate. Do you still want to move forward?</string>
+    <string name="wifi_enable">Wifi is Back</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="server_error">Something\u0027s wrong with the server.</string>
+    <string name="park_loading">Loading…</string>
+    <string name="park_info_contact_title">Contact Information</string>
+    <string name="park_manager_name">Manager:\t</string>
+    <string name="manager_email">Email:\t</string>
+    <string name="manager_phone">Phone:\t</string>
+    <string name="park_name">Name:\t</string>
+    <string name="park_type">Type:\t</string>
+    <string name="park_area">Scale:\t</string>
+    <string name="park_street">Street:\t</string>
+    <string name="park_city">City:\t</string>
+    <string name="park_state">State:\t</string>
+    <string name="park_zip">Zip:\t</string>
+    <string name="park_distance">Distance:\t</string>
+    <string name="park_weather">Weather:\t</string>
+    <string name="button_park_info">CLOSE</string>
+    <string name="service_error">Please check your data service.</string>
+    <string name="distance_format">%s km</string>
+    <string name="temperature_format">%1$s - %2$s F&#176;</string>
+    <string name="area_format">%s acres</string>
+    <string name="map_loading_overtime">Map\u0027s data is not available currently.</string>
+    <string name="filter_title_by_distance">Sort By Distance</string>
+    <string name="filter_tile_by_scale">Sort By Scale</string>
+</resources>

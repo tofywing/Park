@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:id="@+id/parkInfoCard"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/pureWhite"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        card_view:cardBackgroundColor="@color/cardview_dark_background"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/cardCloseButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:elevation="0dp"
+                tools:ignore="PxUsage,RtlHardcoded"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignLeft="@id/cardCloseButton"
+                android:layout_alignParentTop="true"
+                android:elevation="7dp"
+                android:src="@drawable/close_button"
+                tools:ignore="PxUsage,RtlHardcoded"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/parkView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.0">
+
+                    <TextView
+                        android:id="@+id/parkName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/pureWhite"
+                        android:textSize="16sp"
+                        android:textStyle="italic|bold"/>
+
+                    <TextView
+                        android:id="@+id/parkTypeTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkName"
+                        android:text="@string/park_type"/>
+
+                    <TextView
+                        android:id="@+id/parkType"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkName"
+                        android:layout_toRightOf="@id/parkTypeTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkAreaTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkTypeTitle"
+                        android:text="@string/park_area"/>
+
+                    <TextView
+                        android:id="@+id/parkArea"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkType"
+                        android:layout_toRightOf="@id/parkAreaTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkStreetTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkAreaTitle"
+                        android:text="@string/park_street"/>
+
+                    <TextView
+                        android:id="@+id/parkStreet"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkArea"
+                        android:layout_toRightOf="@id/parkStreetTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkCityTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkStreetTitle"
+                        android:text="@string/park_city"/>
+
+                    <TextView
+                        android:id="@+id/parkCity"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkStreet"
+                        android:layout_toRightOf="@id/parkCityTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkStateTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkCityTitle"
+                        android:text="@string/park_state"/>
+
+                    <TextView
+                        android:id="@+id/parkState"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkCity"
+                        android:layout_toRightOf="@id/parkStateTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkZipTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkStateTitle"
+                        android:text="@string/park_zip"/>
+
+                    <TextView
+                        android:id="@+id/parkZip"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkState"
+                        android:layout_toRightOf="@id/parkZipTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/mgrNameTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkZipTitle"
+                        android:text="@string/park_manager_name"/>
+
+                    <TextView
+                        android:id="@+id/mgrName"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkZip"
+                        android:layout_toRightOf="@id/mgrNameTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/mgrPhoneTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrNameTitle"
+                        android:text="@string/manager_phone"/>
+
+                    <TextView
+                        android:id="@+id/mgrPhone"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrName"
+                        android:layout_toRightOf="@id/mgrPhoneTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/mgrEmailTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrPhoneTitle"
+                        android:text="@string/manager_email"/>
+
+                    <TextView
+                        android:id="@+id/mgrEmail"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrPhone"
+                        android:layout_toRightOf="@id/mgrEmailTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkDistanceTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrEmail"
+                        android:text="@string/park_distance"/>
+
+                    <TextView
+                        android:id="@+id/parkDistance"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mgrEmail"
+                        android:layout_toRightOf="@id/parkDistanceTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <TextView
+                        android:id="@+id/parkWeatherTitle"
+                        style="@style/ParkTheme.CardTextStyle.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkDistanceTitle"
+                        android:text="@string/park_weather"/>
+
+                    <TextView
+                        android:id="@+id/parkWeather"
+                        style="@style/ParkTheme.CardTextStyle.Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkDistance"
+                        android:layout_toRightOf="@id/parkDistanceTitle"
+                        tools:ignore="PxUsage,RtlHardcoded"/>
+
+                    <ImageView
+                        android:id="@+id/weatherImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/parkWeather"
+                        android:src="@drawable/icon_na"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/mapSnapshot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+
+            <ProgressBar
+                android:id="@+id/cardProgressBar"
+                style="?android:progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>

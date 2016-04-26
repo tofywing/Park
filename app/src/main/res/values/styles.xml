@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="ParkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/azureBlue</item>
+    </style>
+
+    <style name="ParkTheme.ButtonTextStyle">
+        <item name="android:textColor">@color/pureWhite</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation" tools:targetApi="lollipop">7dp</item>
+        <item name="android:layout_marginTop">19dp</item>
+    </style>
+
+    <style name="ParkTheme.ListTextStyle">
+        <item name="android:textColor">@color/pureBlack</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ParkTheme.CardTextStyle">
+        <item name="android:textColor">@color/pureWhite</item>
+    </style>
+
+    <style name="ParkTheme.CardTextStyle.Header" parent="ParkTheme.CardTextStyle">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ParkTheme.CardTextStyle.Content" parent="ParkTheme.CardTextStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style=""
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/listContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardBackgroundColor="@android:color/transparent"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardPreventCornerOverlap="true"
+            card_view:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/listUpContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/filterSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:showText="true"
+                        android:textOff="D"
+                        android:textOn="S"/>
+
+                    <TextView
+                        android:id="@+id/filterTile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/filterSwitch"
+                        android:gravity="right|bottom"
+                        android:textColor="@color/pureWhite"
+                        android:textSize="12sp"
+                        android:textStyle="bold|italic"/>
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/listLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@id/listUpContainer"
+                    android:background="@color/pureWhite"/>
+
+                <ListView
+                    android:id="@android:id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/listLine"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/reloadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:elevation="0dp"
+        app:borderWidth="5dp"/>
+
+    <TextView
+        style="@style/ParkTheme.ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/reloadButton"
+        android:text="@string/button_reload"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/listButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/reloadButton"
+        android:elevation="0dp"
+        app:borderWidth="5dp"/>
+
+    <TextView
+        style="@style/ParkTheme.ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/listButton"
+        android:text="@string/button_list"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/meButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/reloadButton"
+        android:elevation="0dp"
+        app:borderWidth="5dp"/>
+
+    <TextView
+        style="@style/ParkTheme.ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/meButton"
+        android:layout_below="@id/reloadButton"
+        android:text="@string/button_me"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/parkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listButton"
+        android:layout_toLeftOf="@id/meButton"
+        android:elevation="0dp"
+        app:borderWidth="5dp"/>
+
+    <TextView
+        style="@style/ParkTheme.ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/parkButton"
+        android:layout_below="@id/listButton"
+        android:text="@string/button_park"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/noNetWorkSignContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/meButton"
+        android:src="@drawable/no_connection"
+        android:visibility="gone"
+        tools:ignore="PxUsage,RtlHardcoded"/>
+
+    <ProgressBar
+        android:id="@+id/mapProgressBar"
+        style="?android:progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>
+
+
