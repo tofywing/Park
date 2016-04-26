@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ParkNearMe</string>
+    <string name="app_name">ParksInSF</string>
     <string name="google_app_id">AIzaSyC8QEWGVFWfyfm2rwTaIq5qq1ZevUvffW8</string>
     <string name="address_title_main">Address: </string>
     <string name="button_reload">RELOAD</string>
