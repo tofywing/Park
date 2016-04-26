@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.data;
+package googleplay.personal.yee.park.data;
 
 import org.json.JSONObject;
 

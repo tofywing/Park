@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park;
+package googleplay.personal.yee.park;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,8 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import kinsa.interview.yee.park.manager.ScreenAppearanceManager;
+import kinsa.interview.yee.park.R;
+import googleplay.personal.yee.park.manager.ScreenAppearanceManager;
 
 public class LaunchActivity extends AppCompatActivity {
 

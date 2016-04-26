@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.fragment;
+package googleplay.personal.yee.park.fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -68,20 +68,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import kinsa.interview.yee.park.adapter.ParkAdapter;
-import kinsa.interview.yee.park.callback.SFGovServiceCallBack;
-import kinsa.interview.yee.park.callback.YahooWeatherServiceCallBack;
-import kinsa.interview.yee.park.data.Forecast;
-import kinsa.interview.yee.park.data.MapState;
-import kinsa.interview.yee.park.data.ParkInfo;
-import kinsa.interview.yee.park.manager.MapStateManager;
-import kinsa.interview.yee.park.manager.ParkInfoManager;
+import googleplay.personal.yee.park.adapter.ParkAdapter;
+import googleplay.personal.yee.park.callback.SFGovServiceCallBack;
+import googleplay.personal.yee.park.callback.YahooWeatherServiceCallBack;
+import googleplay.personal.yee.park.data.Forecast;
+import googleplay.personal.yee.park.data.MapState;
+import googleplay.personal.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.manager.MapStateManager;
+import googleplay.personal.yee.park.manager.ParkInfoManager;
 import kinsa.interview.yee.park.R;
-import kinsa.interview.yee.park.manager.ScreenAppearanceManager;
-import kinsa.interview.yee.park.manager.WeatherManager;
-import kinsa.interview.yee.park.service.ImageService;
-import kinsa.interview.yee.park.service.SFGovService;
-import kinsa.interview.yee.park.service.WeatherService;
+import googleplay.personal.yee.park.manager.ScreenAppearanceManager;
+import googleplay.personal.yee.park.manager.WeatherManager;
+import googleplay.personal.yee.park.service.ImageService;
+import googleplay.personal.yee.park.service.SFGovService;
+import googleplay.personal.yee.park.service.WeatherService;
 
 /**
  * Created by Yee on 4/4/16.

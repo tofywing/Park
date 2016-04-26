@@ -1,11 +1,11 @@
-package kinsa.interview.yee.park.callback;
+package googleplay.personal.yee.park.callback;
 
 import android.app.ProgressDialog;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import kinsa.interview.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.data.ParkInfo;
 
 /**
  * Created by Yee on 4/5/16.

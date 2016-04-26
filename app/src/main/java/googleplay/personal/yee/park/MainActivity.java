@@ -1,14 +1,11 @@
-package kinsa.interview.yee.park;
+package googleplay.personal.yee.park;
 
-import android.graphics.Point;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Display;
 
-import java.io.File;
-
-import kinsa.interview.yee.park.fragment.GoogleMapFragment;
+import kinsa.interview.yee.park.R;
+import googleplay.personal.yee.park.fragment.GoogleMapFragment;
 
 
 /**

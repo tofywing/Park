@@ -1,7 +1,6 @@
-package kinsa.interview.yee.park.service;
+package googleplay.personal.yee.park.service;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -16,9 +15,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import kinsa.interview.yee.park.R;
-import kinsa.interview.yee.park.callback.YahooWeatherServiceCallBack;
-import kinsa.interview.yee.park.data.Channel;
-import kinsa.interview.yee.park.data.Forecast;
+import googleplay.personal.yee.park.callback.YahooWeatherServiceCallBack;
+import googleplay.personal.yee.park.data.Channel;
+import googleplay.personal.yee.park.data.Forecast;
 
 /**
  * Created by Yee on 4/20/16.

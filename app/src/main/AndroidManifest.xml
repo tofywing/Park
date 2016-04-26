@@ -16,7 +16,7 @@
         android:protectionLevel="signature"/>
 
     <application
-        android:name=".ParkApplication"
+        android:name="googleplay.personal.yee.park.ParkApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:icon="@mipmap/logo"
@@ -25,7 +25,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity
-            android:name=".LaunchActivity"
+            android:name="googleplay.personal.yee.park.LaunchActivity"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -35,7 +35,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="googleplay.personal.yee.park.MainActivity"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:screenOrientation="portrait"/>
 

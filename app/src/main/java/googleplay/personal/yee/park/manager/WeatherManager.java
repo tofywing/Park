@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.manager;
+package googleplay.personal.yee.park.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import kinsa.interview.yee.park.data.Forecast;
+import googleplay.personal.yee.park.data.Forecast;
 
 /**
  * Created by Yee on 4/21/16.

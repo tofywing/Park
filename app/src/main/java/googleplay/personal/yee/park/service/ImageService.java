@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.service;
+package googleplay.personal.yee.park.service;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,9 +14,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import kinsa.interview.yee.park.LaunchActivity;
-import kinsa.interview.yee.park.MainActivity;
 
 /**
  * Created by Yee on 4/18/16.

@@ -1,9 +1,8 @@
-package kinsa.interview.yee.park.service;
+package googleplay.personal.yee.park.service;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -19,13 +18,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import kinsa.interview.yee.park.callback.SFGovServiceCallBack;
-import kinsa.interview.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.callback.SFGovServiceCallBack;
+import googleplay.personal.yee.park.data.ParkInfo;
 import kinsa.interview.yee.park.R;
 
 /**

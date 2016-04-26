@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.manager;
+package googleplay.personal.yee.park.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import kinsa.interview.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.data.ParkInfo;
 
 /**
  * Created by Yee on 4/4/16.

@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.data;
+package googleplay.personal.yee.park.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

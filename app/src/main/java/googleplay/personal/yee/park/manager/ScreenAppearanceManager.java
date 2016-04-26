@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.manager;
+package googleplay.personal.yee.park.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

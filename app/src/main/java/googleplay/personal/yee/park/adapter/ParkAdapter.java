@@ -1,25 +1,20 @@
-package kinsa.interview.yee.park.adapter;
+package googleplay.personal.yee.park.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
 import android.view.LayoutInflater;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import kinsa.interview.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.data.ParkInfo;
 import kinsa.interview.yee.park.R;
-import kinsa.interview.yee.park.manager.ScreenAppearanceManager;
+import googleplay.personal.yee.park.manager.ScreenAppearanceManager;
 
 /**
  * Created by Yee on 4/11/16.

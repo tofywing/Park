@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park;
+package googleplay.personal.yee.park;
 
 import android.app.Application;
 import android.content.Context;

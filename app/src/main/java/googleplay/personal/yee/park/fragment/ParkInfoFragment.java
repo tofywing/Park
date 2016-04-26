@@ -1,4 +1,4 @@
-package kinsa.interview.yee.park.fragment;
+package googleplay.personal.yee.park.fragment;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -21,12 +21,10 @@ import com.squareup.picasso.Target;
 
 import java.util.Locale;
 
-import kinsa.interview.yee.park.LaunchActivity;
-import kinsa.interview.yee.park.MainActivity;
 import kinsa.interview.yee.park.R;
-import kinsa.interview.yee.park.data.ParkInfo;
-import kinsa.interview.yee.park.manager.ScreenAppearanceManager;
-import kinsa.interview.yee.park.service.ImageService;
+import googleplay.personal.yee.park.data.ParkInfo;
+import googleplay.personal.yee.park.manager.ScreenAppearanceManager;
+import googleplay.personal.yee.park.service.ImageService;
 
 /**
  * Created by Yee on 4/17/16.
