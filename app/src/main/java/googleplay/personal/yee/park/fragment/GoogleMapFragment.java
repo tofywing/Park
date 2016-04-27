@@ -140,8 +140,10 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     CameraPosition mCurrentCameraPosition;
     ParkAdapter mAdapter;
     boolean snapShotIsReady = false;
+    boolean weatherIsReady = false;
     LatLng meLatLng;
     ParkInfoFragment mParkInfoFragment;
+    Forecast forecast;
     int time;
     int[][] colorPattern = new int[][]{new int[]{Color.parseColor("#80FF0000")}, new int[]{Color.parseColor
             ("#80FFFFFF")}, new int[]{Color.parseColor
@@ -730,8 +732,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         if (mParkListSelect != null) {
             final String location = mParkSelected.getCity() + "," +
                     mParkSelected.getState();
-            Forecast forecast;
-            if ((forecast = weatherLoadingAction(location)) == null) {
+            if (weatherLoadingAction(location) == null) {
                 mWeatherService.getWeatherInfo(location);
                 final Timer timer3 = new Timer();
                 time = 0;
@@ -742,6 +743,10 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                             @Override
                             public void run() {
                                 if (mWeatherManager.getSavedForecast(location) != null || time == 10) {
+                                    forecast = mWeatherManager.getSavedForecast(location);
+                                    mParkSelected.setTempHigh(forecast.getHigh());
+                                    mParkSelected.setTempLow(forecast.getLow());
+                                    mParkSelected.setWeatherCode(forecast.getCode());
                                     timer3.cancel();
                                 } else {
                                     mWeatherService.getWeatherInfo(location);
@@ -752,10 +757,12 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                     }
                 }, 0, 500);
             } else {
+                forecast = mWeatherManager.getSavedForecast(location);
                 mParkSelected.setTempHigh(forecast.getHigh());
                 mParkSelected.setTempLow(forecast.getLow());
                 mParkSelected.setWeatherCode(forecast.getCode());
             }
+
             if (snapShotIsReady) {
                 if (mParkInfoFragment != null && mParkInfoFragment.isAdded()) mParkInfoFragment.dismiss();
                 mParkInfoFragment = ParkInfoFragment.newInstance(mParkSelected);

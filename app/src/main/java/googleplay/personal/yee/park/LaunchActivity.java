@@ -75,7 +75,7 @@ public class LaunchActivity extends AppCompatActivity {
         mContainer = (RelativeLayout) findViewById(R.id.launchContainer);
         mSignImage.setBackgroundResource(R.drawable.bird);
         final AnimationDrawable animDrawable = (AnimationDrawable) mSignImage.getBackground();
-        animDrawable.setExitFadeDuration(10);
+        animDrawable.setExitFadeDuration(30);
         animDrawable.start();
         mHandler = new Handler();
         mRunnable = new Runnable() {
