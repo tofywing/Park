@@ -50,4 +50,9 @@ public class ParkAdapter extends ArrayAdapter<ParkInfo> {
         }
         return view;
     }
+
+    @Override
+    public int getCount() {
+        return mDataSet != null ? mDataSet.size() : 0;
+    }
 }

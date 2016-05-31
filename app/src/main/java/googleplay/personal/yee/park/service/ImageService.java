@@ -26,8 +26,6 @@ public class ImageService {
     public static int y = -1;
 
     Context mContext;
-    // public static String newPath = "";
-
 
     public ImageService(Context context) {
         mContext = context;
@@ -63,7 +61,6 @@ public class ImageService {
         Bitmap output = Bitmap.createBitmap(Math.round(sbmp.getWidth()), Math.round(sbmp.getHeight()), Bitmap.Config
                 .ARGB_8888);
         Canvas canvas = new Canvas(output);
-        final int color = 0xffa19774;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
         paint.setAntiAlias(true);

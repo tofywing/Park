@@ -21,8 +21,10 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -87,7 +89,8 @@ import googleplay.personal.yee.park.service.WeatherService;
  * Created by Yee on 4/4/16.
  */
 public class GoogleMapFragment extends ListFragment implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SFGovServiceCallBack, YahooWeatherServiceCallBack {
+        GoogleApiClient.OnConnectionFailedListener, SFGovServiceCallBack,
+        YahooWeatherServiceCallBack {
 
     public static final int GPS_ERROR_DIALOG_REQUEST = 9001;
     public static final float DEFAULT_ZOOM = 9.5f;
@@ -145,7 +148,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     ParkInfoFragment mParkInfoFragment;
     Forecast forecast;
     int time;
-    int[][] colorPattern = new int[][]{new int[]{Color.parseColor("#80FF0000")}, new int[]{Color.parseColor
+    int[][] colorPattern = new int[][]{new int[]{Color.parseColor("#80FF0000")}, new int[]{Color
+            .parseColor
             ("#80FFFFFF")}, new int[]{Color.parseColor
             ("#8000ff00")}, new int[]{Color.parseColor
             ("#80007fff")}, new int[]{Color.parseColor
@@ -157,10 +161,13 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     ColorStateList blue = new ColorStateList(colorPattern, colorPattern[3]);
     ColorStateList black = new ColorStateList(colorPattern, colorPattern[4]);
     ColorStateList orange = new ColorStateList(colorPattern, colorPattern[5]);
+    //CurrentLocationTemperateAddress
+    Address mAddress;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         mListContainer = (RelativeLayout) view.findViewById(R.id.listContainer);
         ViewGroup.LayoutParams params1 = mListContainer.getLayoutParams();
@@ -181,13 +188,13 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         mProgressBar = (ProgressBar) view.findViewById(R.id.mapProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
         if (serviceAvailable())
-            mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).addConnectionCallbacks
-                    (this).addOnConnectionFailedListener(this).build();
+            mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API)
+                    .addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
         mMapStateManager = new MapStateManager(getContext());
         mParkManager = new ParkInfoManager(getContext());
         mFragmentManager = getActivity().getFragmentManager();
         mWeatherManager = new WeatherManager(getActivity());
-        mScreenManager = new ScreenAppearanceManager(getActivity());
+        //mScreenManager = new ScreenAppearanceManager(getActivity());
         mSFGovService = new SFGovService(getContext(), this);
         mImageService = new ImageService(getActivity());
         mWeatherService = new WeatherService(getActivity(), this);
@@ -195,8 +202,9 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(Context
-                        .CONNECTIVITY_SERVICE);
+                ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService
+                        (Context
+                                .CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = manager.getActiveNetworkInfo();
                 if (networkInfo == null || networkInfo.getType() != ConnectivityManager.TYPE_WIFI) {
                     showAlert(getString(R.string.alert_wifi_disabled), getString(R.string.confirm));
@@ -209,7 +217,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                     container.setVisibility(View.VISIBLE);
                 } else {
                     if (mPrefs.getBoolean(WIFI_DISABLED, false)) {
-                        Snackbar.make(getView(), getString(R.string.wifi_enable), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getView(), getString(R.string.wifi_enable), Snackbar
+                                .LENGTH_SHORT).show();
                         SharedPreferences.Editor editor = mPrefs.edit();
                         editor.putBoolean(WIFI_DISABLED, wifiDisabled = false);
                         editor.apply();
@@ -237,7 +246,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
             public void onClick(View v) {
                 mSFGovService.getParkInfo();
                 if (mParkMarker != null) mParkMarker.remove();
-                if (meLatLng != null) cameraUpdate(meLatLng.latitude, meLatLng.longitude, DEFAULT_ZOOM);
+                if (meLatLng != null)
+                    cameraUpdate(meLatLng.latitude, meLatLng.longitude, DEFAULT_ZOOM);
             }
         });
         mListButton = (FloatingActionButton) view.findViewById(R.id.listButton);
@@ -274,7 +284,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
             @Override
             public void onClick(View v) {
                 if (mParkSelected != null) {
-                    cameraUpdate(mParkSelected.getLatitude(), mParkSelected.getLongitude(), PARK_ZOOM);
+                    cameraUpdate(mParkSelected.getLatitude(), mParkSelected.getLongitude(),
+                            PARK_ZOOM);
                     mCurrentCameraPosition = mMap.getCameraPosition();
                     isParkPressed = true;
                     isMePressed = false;
@@ -286,8 +297,9 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         mFilterTitle = (TextView) view.findViewById(R.id.filterTile);
         mFilterSwitch = (Switch) view.findViewById(R.id.filterSwitch);
         mFilterSwitch.setSwitchMinWidth(ScreenAppearanceManager.switchBarLength);
-        mFilterSwitch.getTrackDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), android.R.color
-                .transparent, null), PorterDuff.Mode.OVERLAY);
+        mFilterSwitch.getTrackDrawable().setColorFilter(ResourcesCompat.getColor(getResources(),
+                android.R.color
+                        .transparent, null), PorterDuff.Mode.OVERLAY);
         mFilterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -300,20 +312,23 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                 if (!isChecked) {
                     byDistanceToken = 1;
                     mParkListSelect = mParkListByDistance;
-                    mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
+                    mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map,
+                            mParkListSelect,
                             ScreenAppearanceManager.adapterHeight);
                     setListAdapter(mAdapter);
                     mFilterTitle.setText(getString(R.string.filter_title_by_distance));
                 } else {
                     byDistanceToken = 0;
                     mParkListSelect = mParkListByAlphabet;
-                    mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
+                    mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map,
+                            mParkListSelect,
                             ScreenAppearanceManager.adapterHeight);
                     setListAdapter(mAdapter);
                     mFilterTitle.setText(getString(R.string.filter_tile_by_alphabet));
                 }
                 if (mParkMarker != null) mParkMarker.remove();
-                if (meLatLng != null) cameraUpdate(meLatLng.latitude, meLatLng.longitude, DEFAULT_ZOOM);
+                if (meLatLng != null)
+                    cameraUpdate(meLatLng.latitude, meLatLng.longitude, DEFAULT_ZOOM);
             }
         });
     }
@@ -322,10 +337,13 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
         mProgressBar.setVisibility(View.VISIBLE);
         setGPSInterval();
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest
-                .permission
-                .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        //Question Point
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission
+                .ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (getActivity(), Manifest
+                        .permission
+                        .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -333,7 +351,6 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
         }
         googleMapFetch();
     }
@@ -351,8 +368,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     @Override
     public void onStart() {
         super.onStart();
-        dataRestore();
-        mClient.connect();
+            dataRestore();
+            mClient.connect();
     }
 
 
@@ -373,8 +390,10 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         mMapState.setCameraPosition(mMap.getCameraPosition());
         mMapState.setParkSelected(mParkSelected);
         mMapState.setSelectedPosition(mParkSelectedPosition);
-        mMapStateManager.saveMapState(mMapState, mCurrentLatitude, mCurrentLongitude, mCurrentLocality);
-        mParkManager.saveParkListWithToken(mParkListByDistance, mParkListByAlphabet, byDistanceToken);
+        mMapStateManager.saveMapState(mMapState, mCurrentLatitude, mCurrentLongitude,
+                mCurrentLocality);
+        mParkManager.saveParkListWithToken(mParkListByDistance, mParkListByAlphabet,
+                byDistanceToken);
         SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
         String json = gson.toJson(meLatLng);
@@ -385,10 +404,12 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
 
     private Address getCurrentLocation() throws IOException {
         if (!wifiDisabled) {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                    PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest
-                    .permission
-                    .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission
+                    .ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                    (getContext(), Manifest
+                            .permission
+                            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -396,52 +417,93 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                return null;
             }
             Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mClient);
             if (currentLocation != null) {
-                meLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                meLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude
+                        ());
                 Geocoder gc = new Geocoder(getContext());
-                List<Address> addresses = gc.getFromLocation(meLatLng.latitude, meLatLng.longitude, 1);
-                Address address = addresses.get(0);
-                mCurrentLocality = address.getLocality();
-                return address;
+                List<Address> addresses = gc.getFromLocation(meLatLng.latitude, meLatLng
+                        .longitude, 1);
+                if (addresses.size() > 0) {
+                    Address address = addresses.get(0);
+                    mCurrentLocality = address.getLocality();
+                    return address;
+                }
             } else {
-                Snackbar.make(getView(), getText(R.string.last_location_failed), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(), getText(R.string.last_location_failed), Snackbar
+                        .LENGTH_LONG).show();
                 return null;
             }
+            return null;
         }
         return null;
     }
 
     @Override
-    public void onSFGovServiceSuccess(ProgressDialog dialog, ArrayList<ParkInfo> dataSet) throws IOException {
+    public void onSFGovServiceSuccess(final ProgressDialog dialog, final ArrayList<ParkInfo>
+            dataSet) throws IOException {
         getCurrentLocation();
-        if (meLatLng != null) mParkListByDistance = mSFGovService.getParksByDistance(dataSet, meLatLng, dataSet.size());
+        if (meLatLng == null) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            final Timer timer4 = new Timer();
+            timer4.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (meLatLng != null) {
+                                mParkListByDistance = mSFGovService.getParksByDistance(dataSet,
+                                        meLatLng,
+                                        dataSet.size());
+                                onSFGovServiceSuccessAction(dataSet, dialog);
+                                mProgressBar.setVisibility(View.GONE);
+                                timer4.cancel();
+                            } else if (time == 10) {
+                                mProgressBar.setVisibility(View.GONE);
+                                showServiceUnavailableAlert();
+                            } else time++;
+                        }
+                    });
+                }
+            }, 0, 300);
+        } else onSFGovServiceSuccessAction(dataSet, dialog);
+    }
+
+    void onSFGovServiceSuccessAction(ArrayList<ParkInfo> dataSet, Dialog dialog) {
+        mParkListByDistance = mSFGovService.getParksByDistance(dataSet, meLatLng,
+                dataSet.size());
         mParkListByAlphabet = dataSet;
         if (byDistanceToken == 1) mParkListSelect = mParkListByDistance;
         else mParkListSelect = mParkListByAlphabet;
-        mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect, ScreenAppearanceManager
-                .adapterHeight);
+        mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
+                ScreenAppearanceManager
+                        .adapterHeight);
         setListAdapter(mAdapter);
         setListShown(isListShown);
         removeSavedParkMarker();
-        Snackbar.make(getView(), getContext().getText(R.string.park_ready), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(getView(), getContext().getText(R.string.park_ready), Snackbar
+                .LENGTH_LONG)
+                .show();
         dialog.dismiss();
     }
 
     @Override
     public void onSFGovServiceFailed(ProgressDialog dialog) {
         if (mParkListSelect != null) {
-            mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect, ScreenAppearanceManager
-                    .adapterHeight);
+            mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
+                    ScreenAppearanceManager
+                            .adapterHeight);
             mAdapter.notifyDataSetChanged();
             setListAdapter(mAdapter);
             setListShown(isListShown);
             removeSavedParkMarker();
-            showAlert(getString(R.string.alert_server_error_saved), getString(R.string.confirm));
+            showAlert(getString(R.string.alert_server_error_saved), getString(R.string
+                    .confirm));
         } else {
-            showAlert(getString(R.string.alert_server_error_unsaved), getString(R.string.confirm));
+            showAlert(getString(R.string.alert_server_error_unsaved), getString(R.string
+                    .confirm));
         }
         dialog.dismiss();
     }
@@ -504,8 +566,17 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         if (mParkMarker != null) mParkMarker.remove();
         MarkerOptions options = new MarkerOptions().position(new LatLng(lat, lng)).icon
                 (BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        mParkMarker = mMap.addMarker(options);
-        mMapState.saveParkMarker(mParkMarker);
+
+        //Modified..
+
+        if (mMap == null) {
+            Toast.makeText(getContext(), "mapNull", Toast.LENGTH_LONG).show();
+        } else if (options == null) {
+            Toast.makeText(getContext(), "optionNull", Toast.LENGTH_LONG).show();
+        } else {
+            mParkMarker = mMap.addMarker(options);
+            mMapState.saveParkMarker(mParkMarker);
+        }
     }
 
     void showAlert(String message, String button) {
@@ -516,6 +587,19 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+            }
+        }).show();
+    }
+
+    void showServiceUnavailableAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(R.string.service_unavailable);
+        builder.setCancelable(false);
+        builder.setNegativeButton(R.string.confirm, new DialogInterface
+                .OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onDestroy();
             }
         }).show();
     }
@@ -557,12 +641,14 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     }
 
     private void initMap() {
-        mMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
+        mMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id
+                .mapFragment);
         mMapFragment.getMapAsync(new OnMapReadyCallback() {
                                      @Override
                                      public void onMapReady(GoogleMap googleMap) {
                                          if (googleMap != null) {
-                                             Snackbar.make(getView(), getText(R.string.service_ready), Snackbar
+                                             Snackbar.make(getView(), getText(R.string
+                                                     .service_ready), Snackbar
                                                      .LENGTH_SHORT).show();
                                              mMap = googleMap;
                                          }
@@ -576,20 +662,32 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         int isAvailable = api.isGooglePlayServicesAvailable(getActivity());
         if (isAvailable == ConnectionResult.SUCCESS) return true;
         else if (api.isUserResolvableError(isAvailable)) {
-            Dialog dialog = api.getErrorDialog(getActivity(), isAvailable, GPS_ERROR_DIALOG_REQUEST);
-            onDestroy();
+            Dialog dialog = api.getErrorDialog(getActivity(), isAvailable,
+                    GPS_ERROR_DIALOG_REQUEST);
+            dialog.setCancelable(false);
             dialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onDestroy();
+                }
+            }, 3000);
         } else {
-            Snackbar.make(getView(), getText(R.string.service_unavailable), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getText(R.string.service_unavailable), Snackbar
+                    .LENGTH_SHORT).show();
         }
         return false;
     }
 
     private void dataRestore() {
+//        mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, new
+// ArrayList<ParkInfo>(),
+//                ScreenAppearanceManager.adapterHeight);
         mParkListByDistance = mParkManager.getSavedParkListByDistance();
         mParkListByAlphabet = mParkManager.getSavedParkListByAlphabet();
         byDistanceToken = mParkManager.getSavedFilterToken();
-        mFilterTitle.setText(byDistanceToken == 1 ? getString(R.string.filter_title_by_distance) : getString(R.string
+        mFilterTitle.setText(byDistanceToken == 1 ? getString(R.string.filter_title_by_distance)
+                : getString(R.string
                 .filter_tile_by_alphabet));
         if (byDistanceToken == 1) {
             mFilterTitle.setText(getString(R.string.filter_title_by_distance));
@@ -619,8 +717,9 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
         }
         if (mParkListSelect == null) mSFGovService.getParkInfo();
         else {
-            mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect, ScreenAppearanceManager
-                    .adapterHeight);
+            mAdapter = new ParkAdapter(getActivity(), R.layout.fragment_map, mParkListSelect,
+                    ScreenAppearanceManager
+                            .adapterHeight);
             setListAdapter(mAdapter);
             setListShown(isListShown);
         }
@@ -630,12 +729,14 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
     }
 
     private void googleMapFetch() {
-        mMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
+        mMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id
+                .mapFragment);
         mMapFragment.getMapAsync(new OnMapReadyCallback() {
                                      @Override
                                      public void onMapReady(GoogleMap googleMap) {
                                          if (googleMap != null) {
                                              mMap = googleMap;
+
                                              if (meLatLng == null) {
                                                  try {
                                                      getCurrentLocation();
@@ -649,7 +750,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                                                  mCurrentLatitude = meLatLng.latitude;
                                                  mCurrentLongitude = meLatLng.longitude;
                                              }
-                                             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                             mMap.setOnMarkerClickListener(new GoogleMap
+                                                     .OnMarkerClickListener() {
                                                  @Override
                                                  public boolean onMarkerClick(Marker marker) {
                                                      markerClickAction();
@@ -659,7 +761,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                                              if (mCurrentCameraPosition == null) {
                                                  try {
                                                      if (getCurrentLocation() != null) {
-                                                         cameraUpdate(mCurrentLatitude, mCurrentLongitude,
+                                                         cameraUpdate(mCurrentLatitude,
+                                                                 mCurrentLongitude,
                                                                  DEFAULT_ZOOM);
                                                      }
                                                  } catch (IOException e) {
@@ -668,21 +771,25 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                                              } else {
                                                  if (mMapState != null) {
                                                      if (mMapState.getMeLocality() != null)
-                                                         setMeMarker(mMapState.getMeLocality(), mMapState
-                                                                 .getMeLatitude(), mMapState
-                                                                 .getMeLongitude());
+                                                         setMeMarker(mMapState.getMeLocality(),
+                                                                 mMapState
+                                                                         .getMeLatitude(), mMapState
+                                                                         .getMeLongitude());
                                                      if (mMapState.getParkLocality() != null)
-                                                         setParkMarker(mMapState.getParkLocality(), mMapState
+                                                         setParkMarker(mMapState.getParkLocality
+                                                                 (), mMapState
                                                                  .getParkLatitude(), mMapState
                                                                  .getParkLongitude());
                                                  }
                                                  if (mCurrentCameraPosition != null) {
-                                                     CameraUpdate update = CameraUpdateFactory.newCameraPosition
-                                                             (mCurrentCameraPosition);
+                                                     CameraUpdate update = CameraUpdateFactory
+                                                             .newCameraPosition
+                                                                     (mCurrentCameraPosition);
                                                      mMap.moveCamera(update);
                                                  }
                                              }
-                                             Snackbar.make(getView(), getText(R.string.service_ready), Snackbar
+                                             Snackbar.make(getView(), getText(R.string
+                                                     .service_ready), Snackbar
                                                      .LENGTH_SHORT).show();
                                          } else {
                                              Handler handler = new Handler();
@@ -700,7 +807,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                                                  }
                                              }, 1000);
                                              if (mMap == null)
-                                                 Snackbar.make(getView(), getText(R.string.service_not_ready),
+                                                 Snackbar.make(getView(), getText(R.string
+                                                                 .service_not_ready),
                                                          Snackbar.LENGTH_SHORT).show();
                                          }
                                          mProgressBar.setVisibility(View.GONE);
@@ -742,7 +850,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (mWeatherManager.getSavedForecast(location) != null || time == 10) {
+                                if (mWeatherManager.getSavedForecast(location) != null || time ==
+                                        10) {
                                     forecast = mWeatherManager.getSavedForecast(location);
                                     mParkSelected.setTempHigh(forecast.getHigh());
                                     mParkSelected.setTempLow(forecast.getLow());
@@ -764,7 +873,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
             }
 
             if (snapShotIsReady) {
-                if (mParkInfoFragment != null && mParkInfoFragment.isAdded()) mParkInfoFragment.dismiss();
+                if (mParkInfoFragment != null && mParkInfoFragment.isAdded())
+                    mParkInfoFragment.dismiss();
                 mParkInfoFragment = ParkInfoFragment.newInstance(mParkSelected);
                 mParkInfoFragment.show(mFragmentManager, "ParkInfo");
             } else {
@@ -777,13 +887,14 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (snapShotIsReady || time == 10) {
+                                if (snapShotIsReady) {
                                     if (mParkInfoFragment != null && mParkInfoFragment.isAdded())
                                         mParkInfoFragment.dismiss();
                                     mParkInfoFragment = ParkInfoFragment.newInstance(mParkSelected);
                                     mParkInfoFragment.show(mFragmentManager, "ParkInfo");
                                     if (time == 10)
-                                        Toast.makeText(getActivity(), getString(R.string.map_loading_overtime), Toast
+                                        Toast.makeText(getActivity(), getString(R.string
+                                                .map_loading_overtime), Toast
                                                 .LENGTH_SHORT)
                                                 .show();
                                     mProgressBar.setVisibility(View.GONE);
@@ -793,7 +904,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                             }
                         });
                     }
-                }, 0, 300);
+                }, 0, 500);
             }
         }
     }
@@ -814,7 +925,8 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                     public void onSnapshotReady(Bitmap bitmap) {
                         snapShotIsReady = true;
                         try {
-                            mImageService.saveImage(bitmap, ImageService.TYPE_MAP, mParkSelected.getId());
+                            mImageService.saveImage(bitmap, ImageService.TYPE_MAP, mParkSelected
+                                    .getId());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -844,7 +956,7 @@ public class GoogleMapFragment extends ListFragment implements GoogleApiClient.C
                         }
                     });
                 }
-            }, 0, 300);
+            }, 0, 500);
         }
         return mWeatherManager.getSavedForecast(location);
     }

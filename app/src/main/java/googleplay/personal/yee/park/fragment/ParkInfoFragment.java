@@ -97,9 +97,9 @@ public class ParkInfoFragment extends DialogFragment {
             }
         };
         Picasso.with(getActivity()).load(url).centerCrop().resize((int) Math.abs(Math.round(ScreenAppearanceManager
-                .screenWidth * 0.75)),
+                        .screenWidth * 0.75)),
                 (int) Math.abs(Math.round(ScreenAppearanceManager.screenLength * 0.2))).into(target1);
-        mParkView.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.card_fade_in));
+        mParkView.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.card_fade_in));
         mParkView.setTag(target1);
         mCloseButton = (FloatingActionButton) dialog.findViewById(R.id.cardCloseButton);
         mCloseButton.setBackgroundTintList(red);

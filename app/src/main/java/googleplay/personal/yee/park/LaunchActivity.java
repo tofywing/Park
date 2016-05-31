@@ -137,16 +137,6 @@ public class LaunchActivity extends AppCompatActivity {
         ScreenAppearanceManager.imageId = screenManager.getImageId();
     }
 
-    private void setBackground() {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(this, String.valueOf(requestCode), Toast.LENGTH_LONG).show();
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
